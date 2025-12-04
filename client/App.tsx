@@ -575,19 +575,10 @@ const App: React.FC = () => {
                                             {playingSong.artist}
                                         </span>
                                     </Marquee>
-
-                                    <Marquee
-                                        gradient={false}
-                                        speed={35}
-                                        pauseOnHover
-                                        className="min-w-0"
-                                    >
-                                        <span className="text-xs text-slate-400 pr-6">
-                                            {playingSong.artist}
-                                        </span>
-                                    </Marquee>
+                                    <p className="text-xs text-slate-400 truncate">
+                                        {playingSong.artist}
+                                    </p>
                                 </div>
-
                                 <div className="hidden sm:block min-w-0">
                                     <p className="text-sm font-semibold text-white truncate">
                                         {playingSong.title}

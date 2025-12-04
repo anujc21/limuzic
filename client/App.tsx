@@ -554,7 +554,7 @@ const App: React.FC = () => {
                 <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-800/90 backdrop-blur-xl border-t border-white/5 animate-[slideUp_0.3s_ease-out] lg:left-64 transition-all duration-300">
                     <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
                         <div
-                            className="flex items-center gap-3 flex-1 cursor-pointer hover:opacity-80 transition-opacity"
+                            className="flex items-center gap-3 flex-1 min-w-0 shrink cursor-pointer hover:opacity-80 transition-opacity"
                             onClick={() => setIsPlayerOpen(true)}
                         >
                             <img
@@ -562,16 +562,17 @@ const App: React.FC = () => {
                                 alt=""
                                 className="w-12 h-12 rounded-lg object-cover shadow-sm"
                             />
-                            <div className="flex flex-col min-w-0 flex-1 max-w-[60%]">
-                                <div className="block sm:hidden min-w-0">
+                            <div className="flex flex-col min-w-0 flex-1">
+                                <div className="block sm:hidden min-w-0 overflow-hidden">
                                     <Marquee
                                         gradient={false}
                                         speed={40}
                                         pauseOnHover
-                                        className="min-w-0 leading-tight"
+                                        className="min-w-0"
                                     >
                                         <span className="text-sm font-semibold text-white pr-6">
-                                            {playingSong.title}
+                                            {playingSong.title} —{" "}
+                                            {playingSong.artist}
                                         </span>
                                     </Marquee>
 
@@ -579,7 +580,7 @@ const App: React.FC = () => {
                                         gradient={false}
                                         speed={35}
                                         pauseOnHover
-                                        className="min-w-0 leading-tight"
+                                        className="min-w-0"
                                     >
                                         <span className="text-xs text-slate-400 pr-6">
                                             {playingSong.artist}

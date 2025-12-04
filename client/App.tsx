@@ -8,6 +8,7 @@ import YouTubePlayer from "./components/YouTubePlayer";
 import Sidebar, { View } from "./components/Sidebar";
 import AddToPlaylistModal from "./components/AddToPlaylistModal";
 import { Trash2, Play, Plus } from "lucide-react";
+import Marquee from "react-fast-marquee";
 
 const App: React.FC = () => {
     const [songs, setSongs] = useState<Song[]>([]);
@@ -561,13 +562,39 @@ const App: React.FC = () => {
                                 alt=""
                                 className="w-12 h-12 rounded-lg object-cover shadow-sm"
                             />
-                            <div className="hidden sm:block">
-                                <p className="text-sm font-semibold text-white">
-                                    {playingSong.title}
-                                </p>
-                                <p className="text-xs text-slate-400">
-                                    {playingSong.artist}
-                                </p>
+                            <div className="flex flex-col min-w-0">
+                                <div className="block sm:hidden min-w-0">
+                                    <Marquee
+                                        gradient={false}
+                                        speed={40}
+                                        pauseOnHover
+                                        className="min-w-0 leading-tight"
+                                    >
+                                        <span className="text-sm font-semibold text-white pr-6">
+                                            {playingSong.title}
+                                        </span>
+                                    </Marquee>
+
+                                    <Marquee
+                                        gradient={false}
+                                        speed={35}
+                                        pauseOnHover
+                                        className="min-w-0 leading-tight"
+                                    >
+                                        <span className="text-xs text-slate-400 pr-6">
+                                            {playingSong.artist}
+                                        </span>
+                                    </Marquee>
+                                </div>
+
+                                <div className="hidden sm:block min-w-0">
+                                    <p className="text-sm font-semibold text-white truncate">
+                                        {playingSong.title}
+                                    </p>
+                                    <p className="text-xs text-slate-400 truncate">
+                                        {playingSong.artist}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 

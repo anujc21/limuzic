@@ -562,7 +562,7 @@ const App: React.FC = () => {
                                 alt=""
                                 className="w-12 h-12 rounded-lg object-cover shadow-sm"
                             />
-                            <div className="flex flex-col min-w-0">
+                            <div className="flex flex-col min-w-0 flex-1 max-w-[60%]">
                                 <div className="block sm:hidden min-w-0">
                                     <Marquee
                                         gradient={false}

@@ -16,7 +16,7 @@ const options = {
 };
 
 app.get("/", (req, res) => {
-  res.status(200).send("Success");
+    res.status(200).send("Success");
 });
 
 app.get("/home", async (req, res) => {
@@ -24,6 +24,7 @@ app.get("/home", async (req, res) => {
         const results = await youtube.search(options.home);
         res.json(results);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: "Something went wrong" });
     }
 });
@@ -33,6 +34,7 @@ app.get("/artists", async (req, res) => {
         const results = await youtube.search(options.artists);
         res.json(results);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: "Something went wrong" });
     }
 });
@@ -42,6 +44,7 @@ app.get("/trending", async (req, res) => {
         const results = await youtube.search(options.trending);
         res.json(results);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: "Something went wrong" });
     }
 });
@@ -51,6 +54,7 @@ app.get("/search/:query", async (req, res) => {
         const results = await youtube.search(req.params.query.slice(0, 300));
         res.json(results);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: "Something went wrong" });
     }
 });

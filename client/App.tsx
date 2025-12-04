@@ -19,21 +19,18 @@ const App: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    
     const [currentView, setCurrentView] = useState<View>("home");
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(
         null
     );
 
-    
     const [volume, setVolume] = useState(80);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [isShuffle, setIsShuffle] = useState(false);
-    const [repeatMode, setRepeatMode] = useState<'off' | 'all' | 'one'>('off');
+    const [repeatMode, setRepeatMode] = useState<"off" | "all" | "one">("off");
 
-    
     const [playlists, setPlaylists] = useState<Playlist[]>(() => {
         const saved = localStorage.getItem("playlists");
         if (saved) return JSON.parse(saved);
@@ -42,26 +39,27 @@ const App: React.FC = () => {
         ];
     });
 
-    
     const [searchHistory, setSearchHistory] = useState<string[]>(() => {
-        const saved = localStorage.getItem('searchHistory');
+        const saved = localStorage.getItem("searchHistory");
         return saved ? JSON.parse(saved) : [];
     });
 
     useEffect(() => {
-        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
     }, [searchHistory]);
 
     const addToHistory = (query: string) => {
         if (!query.trim()) return;
-        setSearchHistory(prev => {
-            const filtered = prev.filter(item => item.toLowerCase() !== query.toLowerCase());
+        setSearchHistory((prev) => {
+            const filtered = prev.filter(
+                (item) => item.toLowerCase() !== query.toLowerCase()
+            );
             return [query, ...filtered].slice(0, 5);
         });
     };
 
     const removeFromHistory = (item: string) => {
-        setSearchHistory(prev => prev.filter(i => i !== item));
+        setSearchHistory((prev) => prev.filter((i) => i !== item));
     };
 
     const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
@@ -116,7 +114,6 @@ const App: React.FC = () => {
 
     const playerRef = useRef<any>(null);
 
-    
     const loadData = useCallback(async () => {
         try {
             setIsLoading(true);
@@ -137,14 +134,13 @@ const App: React.FC = () => {
                         data = await fetchTrending();
                         break;
                     case "playlist":
-                        
                         if (selectedPlaylistId) {
                             const playlist = playlists.find(
                                 (p) => p.id === selectedPlaylistId
                             );
                             data = playlist ? playlist.songs : [];
                         } else {
-                            data = []; 
+                            data = [];
                         }
                         break;
                     case "about":
@@ -152,7 +148,10 @@ const App: React.FC = () => {
                         break;
                 }
             }
-            setSongs(data);
+            const unique = Array.from(
+                new Map(data.map((s) => [s.id, s])).values()
+            );
+            setSongs(unique);
         } catch (err) {
             console.error(err);
             setError("Failed to load content. Please check your connection.");
@@ -161,23 +160,23 @@ const App: React.FC = () => {
         }
     }, [currentView, activeSearchQuery, selectedPlaylistId, playlists]);
 
-    
     useEffect(() => {
-        if (currentView !== "playlist" || activeSearchQuery || selectedPlaylistId) {
+        if (
+            currentView !== "playlist" ||
+            activeSearchQuery ||
+            selectedPlaylistId
+        ) {
             loadData();
         } else {
             setIsLoading(false);
         }
     }, [currentView, activeSearchQuery, selectedPlaylistId]);
 
-    
-
     const currentSongIndex = songs.findIndex((s) => s.id === currentSongId);
     const [playingSong, setPlayingSong] = useState<Song | null>(null);
 
     useEffect(() => {
         if (currentSongId) {
-            
             let found = songs.find((s) => s.id === currentSongId);
             if (!found) {
                 for (const p of playlists) {
@@ -211,20 +210,22 @@ const App: React.FC = () => {
 
     const handleNext = useCallback(() => {
         if (songs.length === 0) return;
-        
+
         let nextIndex = 0;
         if (isShuffle) {
-            
             nextIndex = Math.floor(Math.random() * songs.length);
-            
+
             if (songs.length > 1 && nextIndex === currentSongIndex) {
                 nextIndex = (nextIndex + 1) % songs.length;
             }
         } else {
             if (currentSongIndex !== -1) {
                 nextIndex = (currentSongIndex + 1) % songs.length;
-                
-                if (repeatMode === 'off' && currentSongIndex === songs.length - 1) {
+
+                if (
+                    repeatMode === "off" &&
+                    currentSongIndex === songs.length - 1
+                ) {
                     setIsPlaying(false);
                     return;
                 }
@@ -238,7 +239,7 @@ const App: React.FC = () => {
     }, [currentSongIndex, songs, isShuffle, repeatMode]);
 
     const handleSongEnd = useCallback(() => {
-        if (repeatMode === 'one' && playerRef.current) {
+        if (repeatMode === "one" && playerRef.current) {
             playerRef.current.seekTo(0);
             setIsPlaying(true);
         } else {
@@ -281,10 +282,10 @@ const App: React.FC = () => {
                         About LiMuzic
                     </h2>
                     <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                        LiMuzic is your ultimate destination for ad-free
-                        music streaming. Powered by YouTube, we bring you the
-                        best tracks, trending hits, and your favorite artists in
-                        a sleek, modern interface designed for music lovers.
+                        LiMuzic is your ultimate destination for ad-free music
+                        streaming. Powered by YouTube, we bring you the best
+                        tracks, trending hits, and your favorite artists in a
+                        sleek, modern interface designed for music lovers.
                     </p>
                     <div className="p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
                         <p className="text-sm text-slate-400">Version 1.0.0</p>
@@ -296,14 +297,16 @@ const App: React.FC = () => {
             );
         }
 
-        
-        if (currentView === "playlist" && !selectedPlaylistId && !activeSearchQuery) {
+        if (
+            currentView === "playlist" &&
+            !selectedPlaylistId &&
+            !activeSearchQuery
+        ) {
             return (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-[fadeIn_0.5s_ease-out]">
-
                     <button
                         onClick={() => {
-                            setSongToAddToPlaylist(null); 
+                            setSongToAddToPlaylist(null);
                             setIsAddToPlaylistModalOpen(true);
                         }}
                         className="group flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-white/10 hover:border-violet-500/50 hover:bg-white/5 transition-all h-48"
@@ -333,9 +336,9 @@ const App: React.FC = () => {
 
                             <div className="flex items-center justify-between mt-4">
                                 <div className="flex -space-x-2 overflow-hidden">
-                                    {playlist.songs.slice(0, 3).map((s, i) => (
+                                    {playlist.songs.slice(0, 3).map((s) => (
                                         <img
-                                            key={i}
+                                            key={`${playlist.id}-${s.id}`}
                                             src={s.coverUrl}
                                             alt=""
                                             className="inline-block h-8 w-8 rounded-full ring-2 ring-slate-900 object-cover"
@@ -366,10 +369,8 @@ const App: React.FC = () => {
             );
         }
 
-        
         return (
             <>
-
                 {isLoading && (
                     <div className="flex justify-center py-20">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-500"></div>
@@ -381,7 +382,6 @@ const App: React.FC = () => {
                         <p>{error}</p>
                     </div>
                 )}
-
 
                 {!isLoading && !error && (
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
@@ -496,7 +496,7 @@ const App: React.FC = () => {
                         setCurrentView(view);
                         setSearchInputValue("");
                         setActiveSearchQuery("");
-                        setSelectedPlaylistId(null); 
+                        setSelectedPlaylistId(null);
                     }}
                     isOpen={isMobileMenuOpen}
                     onClose={() => setIsMobileMenuOpen(false)}
@@ -504,7 +504,6 @@ const App: React.FC = () => {
 
                 <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
                     <div className="max-w-7xl mx-auto">
-
                         <div className="mb-8 animate-[fadeIn_0.5s_ease-out] flex items-center justify-between">
                             <div>
                                 <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-500 mb-2">
@@ -534,7 +533,6 @@ const App: React.FC = () => {
                 </main>
             </div>
 
-
             {playingSong && (
                 <YouTubePlayer
                     videoId={playingSong.id}
@@ -550,7 +548,6 @@ const App: React.FC = () => {
                     }}
                 />
             )}
-
 
             {!isPlayerOpen && playingSong && (
                 <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-800/90 backdrop-blur-xl border-t border-white/5 animate-[slideUp_0.3s_ease-out] lg:left-64 transition-all duration-300">
@@ -631,7 +628,6 @@ const App: React.FC = () => {
                 </div>
             )}
 
-
             {isPlayerOpen && playingSong && (
                 <FullPlayer
                     currentSong={playingSong}
@@ -645,10 +641,10 @@ const App: React.FC = () => {
                     repeatMode={repeatMode}
                     onToggleShuffle={() => setIsShuffle(!isShuffle)}
                     onToggleRepeat={() => {
-                        setRepeatMode(current => {
-                            if (current === 'off') return 'all';
-                            if (current === 'all') return 'one';
-                            return 'off';
+                        setRepeatMode((current) => {
+                            if (current === "off") return "all";
+                            if (current === "all") return "one";
+                            return "off";
                         });
                     }}
                     isLiked={playlists.some((p) =>
@@ -663,11 +659,10 @@ const App: React.FC = () => {
                     onToggleLike={() => openAddToPlaylistModal(playingSong)}
                     onPlaylistClick={() => {
                         setIsPlayerOpen(false);
-                        setCurrentView('playlist');
+                        setCurrentView("playlist");
                     }}
                 />
             )}
-
 
             <AddToPlaylistModal
                 isOpen={isAddToPlaylistModalOpen}

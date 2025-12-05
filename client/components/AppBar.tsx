@@ -45,14 +45,12 @@ const AppBar: React.FC<AppBarProps> = ({
         <div className="sticky top-0 z-50 w-full backdrop-blur-xl bg-slate-900/80 border-b border-white/10 shadow-lg">
             <div className="w-full px-4 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
-
                     <button
                         onClick={onMenuClick}
                         className="lg:hidden p-2 -ml-2 mr-2 text-slate-400 hover:text-white"
                     >
                         <Menu className="w-6 h-6" />
                     </button>
-
 
                     <div
                         className="flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity"
@@ -67,7 +65,6 @@ const AppBar: React.FC<AppBarProps> = ({
                             LiMuzic
                         </span>
                     </div>
-
 
                     <div
                         className="flex-1 w-full max-w-3xl ml-2 sm:mx-4 lg:mx-0 lg:flex-none lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:w-[32rem] lg:max-w-none relative"
@@ -89,7 +86,7 @@ const AppBar: React.FC<AppBarProps> = ({
                                 }}
                             />
                             <button
-                                className="absolute right-0 top-0 bottom-0 px-4 flex items-center justify-center text-slate-400 hover:text-white transition-colors rounded-r-full"
+                                className="absolute right-0 top-0 bottom-0 px-4 flex items-center justify-center text-slate-400 hover:text-white transition-colors rounded-r-full cursor-pointer"
                                 onClick={() => {
                                     onSearchSubmit(searchQuery);
                                     setIsFocused(false);
@@ -98,7 +95,6 @@ const AppBar: React.FC<AppBarProps> = ({
                                 <Search className="h-5 w-5" />
                             </button>
                         </div>
-
 
                         {isFocused && searchHistory.length > 0 && (
                             <div className="absolute top-full left-0 right-0 mt-2 bg-slate-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-[fadeIn_0.1s_ease-out] z-50">
@@ -114,7 +110,6 @@ const AppBar: React.FC<AppBarProps> = ({
                                             <div
                                                 className="flex-1 px-4 py-3 flex items-center gap-3 text-slate-300 hover:text-white"
                                                 onMouseDown={(e) => {
-                                                    
                                                     e.preventDefault();
                                                     onSelectHistoryItem(item);
                                                     setIsFocused(false);
@@ -139,8 +134,6 @@ const AppBar: React.FC<AppBarProps> = ({
                             </div>
                         )}
                     </div>
-
-
                 </div>
             </div>
         </div>

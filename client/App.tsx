@@ -310,7 +310,7 @@ const App: React.FC = () => {
                             setSongToAddToPlaylist(null);
                             setIsAddToPlaylistModalOpen(true);
                         }}
-                        className="group flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-white/10 hover:border-violet-500/50 hover:bg-white/5 transition-all h-48"
+                        className="group flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-white/10 hover:border-violet-500/50 hover:bg-white/5 transition-all h-48 cursor-pointer"
                     >
                         <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-violet-500 group-hover:text-white transition-colors">
                             <Plus className="w-6 h-6 text-slate-400 group-hover:text-white" />
@@ -353,7 +353,7 @@ const App: React.FC = () => {
                                                 e.stopPropagation();
                                                 deletePlaylist(playlist.id);
                                             }}
-                                            className="p-2 text-slate-500 hover:text-red-400 transition-colors"
+                                            className="p-2 text-slate-500 hover:text-red-400 transition-colors cursor-pointer"
                                             title="Delete Playlist"
                                         >
                                             <Trash2 className="w-5 h-5" />
@@ -437,7 +437,7 @@ const App: React.FC = () => {
             case "playlist":
                 return "Your Library";
             case "about":
-                return "About Us";
+                return "About LiMusic";
             default:
                 return "LiMuzic";
         }

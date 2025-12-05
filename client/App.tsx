@@ -522,7 +522,7 @@ const App: React.FC = () => {
                                         onClick={() =>
                                             setSelectedPlaylistId(null)
                                         }
-                                        className="text-sm text-slate-400 hover:text-white underline"
+                                        className="text-sm text-slate-400 hover:text-white underline cursor-pointer"
                                     >
                                         Back to Playlists
                                     </button>

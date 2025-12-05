@@ -1,6 +1,6 @@
 # LiMuzic
 
-Limuzic is a modern, high-performance web application designed to enhance the way users discover, manage, and listen to music. With a refined interface, intelligent discovery tools, and robust playlist capabilities, Limuzic delivers a streamlined and engaging music experience.
+LiMuzic is a modern, high-performance web application designed to enhance the way users discover, manage, and listen to music. With a refined interface, intelligent discovery tools, and robust playlist capabilities, Limuzic delivers a streamlined and engaging music experience.
 
 ### [**Live App**](https://limuzic.pages.dev/)
 

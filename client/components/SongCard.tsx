@@ -21,11 +21,11 @@ const SongCard: React.FC<SongCardProps> = ({
 }) => {
     return (
         <div
-            className={`group relative flex flex-col p-2 rounded-2xl transition-all duration-300 cursor-pointer
+            className={`group relative flex flex-col p-1 rounded-2xl transition-all duration-300 cursor-pointer
                 ${
                     isCurrent
                         ? "p-4 bg-white/10 ring-1 ring-white/20 shadow-xl"
-                        : "hover:bg-white/5 hover:shadow-lg"
+                        : "hover:bg-white/5 hover:shadow-lg hover:p-4"
                 }
             `}
             onClick={onClick}
@@ -43,7 +43,7 @@ const SongCard: React.FC<SongCardProps> = ({
                     src={song.coverUrl}
                     alt={song.title}
                     className={`relative z-10 w-full h-full object-contain transition-transform duration-500 ${
-                        isCurrent ? "scale-105" : "group-hover:scale-105"
+                        isCurrent ? "scale-105" : ""
                     }`}
                 />
 

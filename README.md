@@ -1,4 +1,4 @@
-# Limuzic
+# LiMuzic
 
 Limuzic is a modern, high-performance web application designed to enhance the way users discover, manage, and listen to music. With a refined interface, intelligent discovery tools, and robust playlist capabilities, Limuzic delivers a streamlined and engaging music experience.
 
@@ -47,7 +47,7 @@ No account creation required. All your playlists and search history are stored l
 
 ## Installation
 
-Follow the steps below to install and run Limuzic locally:
+Follow the steps below to install and run LiMuzic locally:
 
 ### 1. Clone the Repository
 ```bash

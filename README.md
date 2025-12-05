@@ -26,6 +26,9 @@ A thoughtfully designed interface that prioritizes ease of use, navigation, and 
 ### Fast and Responsive
 Developed with modern web technologies to ensure quick load times, responsive layouts, and a seamless experience across devices, from desktops to mobile phones.
 
+### Ad-Free Streaming
+Enjoy uninterrupted music playback without any advertisements.
+
 ### Advanced Player Controls
 Take full control of your music with Shuffle, Repeat (One/All), Volume control, and precise seeking.
 
